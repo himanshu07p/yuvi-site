@@ -1,0 +1,33 @@
+/* Main CSS file that imports all component files */
+
+/* Base styles */
+@import 'base/variables.css';
+@import 'base/reset.css';
+@import 'base/typography.css';
+
+/* Layout */
+@import 'layout/containers.css';
+@import 'layout/grid.css';
+
+/* Components */
+@import 'components/header.css';
+@import 'components/navigation.css';
+@import 'components/footer.css';
+@import 'components/hero.css';
+@import 'components/buttons.css';
+@import 'components/cards.css';
+@import 'components/forms.css';
+@import 'components/testimonials.css';
+@import 'components/blog.css';
+@import 'components/sections.css'; /* Ensure this is imported */
+
+/* Pages */
+@import 'pages/about.css'; /* Import the new about page styles */
+@import 'pages/contact.css'; /* Added contact page styles */
+@import 'pages/service-page.css'; /* Added service page styles */
+
+/* Utilities */
+@import 'utilities/helpers.css';
+
+/* Responsive */
+@import 'responsive.css';

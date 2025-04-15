@@ -1,0 +1,172 @@
+css/responsive.css
+
+/* Mobile menu styles */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+@media (max-width: 1200px) {
+    /* Styles for devices with a max width of 1200px */
+    body {
+        font-size: 16px;
+    }
+    .container {
+        padding: 0 15px;
+        max-width: 95%;
+    }
+    .blog-posts {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    /* Styles for devices with a max width of 992px */
+    .navbar {
+        flex-direction: column;
+    }
+    .service-card {
+        margin-bottom: 20px;
+    }
+    header .container {
+        flex-direction: column;
+        padding: 15px;
+    }
+    .logo {
+        margin-bottom: 15px;
+    }
+    .service-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    .blog-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .blog-search {
+        margin-top: 20px;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Styles for devices with a max width of 768px */
+    .hero {
+        height: 120vh; /* Increased height for mobile too */
+        margin-top: -60px; /* Adjusted negative margin for mobile */
+        padding: 0;
+    }
+    .hero-content {
+        padding-top: 0; /* Removed padding-top */
+        padding-bottom: 0;
+        justify-content: center; /* Keep content centered */
+    }
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+    /* Mobile navigation */
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: #000000; /* Change to black for better visibility */
+    }
+    nav ul {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -300px;
+        width: 280px;
+        height: 100vh;
+        background-color: white; /* Changed from primary color to white */
+        padding: 80px 0 30px;
+        overflow-y: auto;
+        transition: right 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    nav ul.active {
+        right: 0;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    }
+    nav li {
+        width: 100%;
+    }
+    nav a {
+        padding: 15px 25px;
+        color: #000000; /* Ensure text is black in mobile view */
+        border-bottom: 1px solid rgba(0,0,0,0.1); /* Darker border for visibility */
+    }
+    .dropdown-menu {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background-color: #f8f8f8; /* Slightly off-white to distinguish from main menu */
+    }
+    .dropdown-menu a {
+        padding-left: 40px;
+    }
+    .has-dropdown:hover .dropdown-menu {
+        display: none;
+    }
+    .has-dropdown.active .dropdown-menu {
+        display: flex;
+    }
+    /* Services grid */
+    .service-list {
+        grid-template-columns: 1fr;
+    }
+    /* Blog posts */
+    .blog-posts {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Styles for devices with a max width of 576px */
+    .footer {
+        text-align: center;
+    }
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+    }
+    .contact-form button {
+        width: 100%;
+    }
+    footer ul {
+        flex-direction: column;
+    }
+    footer li {
+        margin: 5px 0;
+    }
+    .hero {
+        height: 120vh;
+        margin-top: -60px;
+        padding: 40px 15px;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 280px;
+    }
+    .blog-meta {
+        flex-direction: column;
+    }
+    .blog-meta span {
+        margin-bottom: 5px;
+    }
+}

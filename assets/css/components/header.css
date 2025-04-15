@@ -1,0 +1,105 @@
+/* Header Component */
+
+header {
+    background-color: rgba(255, 255, 255, 0.7); /* Adjusted alpha for more translucency */
+    backdrop-filter: blur(10px); /* Increase blur slightly */
+    -webkit-backdrop-filter: blur(10px); /* Safari compatibility */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-sticky);
+    padding: 1.25rem 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Darker border for light background */
+}
+
+header.scrolled {
+    background-color: rgba(255, 255, 255, 0.8); /* Adjusted alpha for more translucency */
+    box-shadow: var(--box-shadow-md);
+    backdrop-filter: blur(12px); /* Slightly increase blur on scroll */
+    -webkit-backdrop-filter: blur(12px); /* Safari compatibility */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Keep or adjust border */
+    padding: 0.85rem 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 45px; /* Add left margin to move it right */
+}
+
+.logo img {
+    height: 60px; /* Slightly adjust logo height if needed */
+    width: auto;
+    margin-right: 0; /* Remove margin as text is hidden */
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.logo:hover img {
+    transform: scale(1.05);
+}
+
+.logo h1 {
+    display: none; /* Hide the company name */
+}
+
+header.scrolled .logo h1 {
+    color: var(--text-dark); /* Keep text dark when scrolled */
+    text-shadow: none;
+    font-size: var(--text-lg);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-button {
+    background-image: var(--gradient-primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: var(--border-radius-full);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--text-sm);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--box-shadow-sm);
+}
+
+.contact-button:hover {
+    box-shadow: var(--box-shadow-lg);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-dark); /* Change initial icon color to dark */
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.3s ease;
+    outline: none;
+}
+
+header.scrolled .mobile-menu-btn {
+    color: var(--text-dark); /* Keep icon color dark on scroll */
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn.active {
+    color: var(--primary);
+}

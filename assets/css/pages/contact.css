@@ -1,0 +1,119 @@
+/* Contact Page Specific Styles */
+
+.contact-hero {
+    background: var(--gradient-dark); /* Or use a specific image/gradient */
+}
+
+.contact-details-form-section {
+    padding: var(--space-3xl) 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Adjust ratio as needed */
+    gap: var(--space-2xl);
+    align-items: flex-start; /* Align items to the top */
+}
+
+.contact-details-content .section-title,
+.contact-form-container .section-title {
+    text-align: left;
+    margin-bottom: var(--space-lg);
+}
+
+.contact-details-content .section-title:after,
+.contact-form-container .section-title:after {
+    left: 0;
+    transform: none;
+}
+
+.contact-details-content p {
+    color: var(--text-light);
+    margin-bottom: var(--space-lg);
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.contact-info-item i {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-top: 5px;
+    width: 25px;
+    text-align: center;
+}
+
+.contact-info-item div strong {
+    display: block;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-dark);
+    margin-bottom: var(--space-xs);
+}
+
+.contact-info-item div p {
+    margin-bottom: 0;
+    line-height: var(--line-height-relaxed);
+    color: var(--text-light);
+}
+.contact-info-item div p a {
+    color: var(--text-light);
+    border-bottom: 1px solid transparent;
+}
+.contact-info-item div p a:hover {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+
+.contact-form-container {
+    background-color: var(--light-bg);
+    padding: var(--space-xl);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+}
+
+/* Use styles from forms.css for .styled-form */
+
+.map-section {
+    padding: 0; /* Remove padding if map should be edge-to-edge */
+    margin-bottom: calc(-1 * var(--space-lg)); /* Overlap footer slightly if desired */
+}
+
+.map-container {
+    line-height: 0; /* Remove extra space below iframe */
+}
+
+.map-container iframe {
+    display: block; /* Ensure iframe behaves like a block element */
+    width: 100%;
+    border: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    .contact-form-container {
+        margin-top: var(--space-xl);
+    }
+    .contact-details-content .section-title,
+    .contact-form-container .section-title {
+        text-align: center;
+    }
+    .contact-details-content .section-title:after,
+    .contact-form-container .section-title:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-hero {
+        padding: var(--space-3xl) 0 var(--space-2xl);
+    }
+}

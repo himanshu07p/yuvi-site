@@ -1,0 +1,109 @@
+/* Service Page Specific Styles */
+
+.service-hero {
+    background: var(--gradient-dark); /* Default gradient, can be customized per service */
+    color: white;
+}
+
+.service-content-section {
+    padding: var(--space-3xl) 0;
+}
+
+.service-content-section .container {
+    max-width: 900px; /* Slightly narrower container for better readability */
+}
+
+.service-content-section h2,
+.service-content-section h3 {
+    margin-bottom: var(--space-md);
+    color: var(--text-dark);
+}
+
+.service-content-section h2 {
+    font-size: var(--text-2xl);
+    position: relative;
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.service-content-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.service-content-section p {
+    color: var(--text-light);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-lg);
+}
+
+.service-content-section ul,
+.service-content-section ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-md);
+}
+
+.service-content-section li {
+    margin-bottom: var(--space-sm);
+    color: var(--text-light);
+    position: relative;
+    padding-left: var(--space-md); /* Space for icon */
+}
+
+.service-content-section ul li::before {
+    content: '\f00c'; /* FontAwesome check icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 4px;
+    color: var(--primary);
+    font-size: 0.9em;
+}
+
+.service-content-section ol {
+    list-style: none;
+    counter-reset: step-counter;
+}
+
+.service-content-section ol li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: -10px; /* Adjust position */
+    top: 0px;
+    background: var(--primary);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xs);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+}
+
+.service-cta-section {
+    background-color: var(--light-bg);
+    text-align: center;
+}
+
+.service-cta-section h2 {
+    color: var(--text-dark);
+    margin-bottom: var(--space-sm);
+}
+
+.service-cta-section p {
+    color: var(--text-light);
+    margin-bottom: var(--space-lg);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
