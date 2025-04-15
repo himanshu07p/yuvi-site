@@ -95,41 +95,93 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Testimonial slider
-    const prevBtn = document.querySelector('.prev-testimonial');
-    const nextBtn = document.querySelector('.next-testimonial');
-    const dots = document.querySelectorAll('.dot');
+    // Testimonial slider - completely redesigned
+    const testimonials = document.querySelectorAll('.testimonial');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const dotBtns = document.querySelectorAll('.dot-btn');
     let currentSlide = 0;
-    
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', function() {
-            navigateSlide(-1);
+    const slideCount = testimonials.length;
+
+    if (testimonials.length > 0 && prevBtn && nextBtn) {
+        // Initialize first slide
+        updateSlides();
+
+        // Event listeners for navigation
+        prevBtn.addEventListener('click', () => {
+            goToSlide(currentSlide - 1);
         });
-        
-        nextBtn.addEventListener('click', function() {
-            navigateSlide(1);
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide(currentSlide + 1);
         });
-        
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', function() {
-                currentSlide = index;
-                updateSlider();
+
+        // Dot navigation
+        dotBtns.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
             });
         });
-        
-        function navigateSlide(direction) {
-            currentSlide = (currentSlide + direction + dots.length) % dots.length;
-            updateSlider();
+
+        // Functions to control slider
+        function goToSlide(index) {
+            // Handle index wrapping
+            if (index < 0) {
+                index = slideCount - 1;
+            } else if (index >= slideCount) {
+                index = 0;
+            }
+            
+            // Skip if already on this slide
+            if (currentSlide === index) return;
+            
+            // Update current slide
+            currentSlide = index;
+            updateSlides();
         }
-        
-        function updateSlider() {
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+
+        function updateSlides() {
+            // Update testimonial classes
+            testimonials.forEach((slide, i) => {
+                // Remove all classes
+                slide.classList.remove('active', 'prev');
+                
+                // Set appropriate class based on position relative to current slide
+                if (i === currentSlide) {
+                    slide.classList.add('active');
+                } else if (i === ((currentSlide - 1 + slideCount) % slideCount)) {
+                    slide.classList.add('prev');
+                }
             });
             
-            // Here you would update the visible testimonial
-            // This is a placeholder for actual implementation
-            console.log(`Showing slide ${currentSlide + 1}`);
+            // Update dot buttons
+            dotBtns.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+                dot.setAttribute('aria-selected', i === currentSlide ? 'true' : 'false');
+            });
+        }
+
+        // Auto-advance slides
+        let slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+
+        // Pause auto-advance on hover or focus
+        const sliderContainer = document.querySelector('.testimonials-slider');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            sliderContainer.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+            });
+            
+            sliderContainer.addEventListener('focusin', () => {
+                clearInterval(slideInterval);
+            });
+            
+            sliderContainer.addEventListener('focusout', () => {
+                slideInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+            });
         }
     }
 

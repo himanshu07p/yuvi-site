@@ -50,9 +50,10 @@
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: var(--space-lg); 
+    /* Remove specific padding, rely on .container padding */
+    /* padding: var(--space-lg); */
     height: auto; 
-    max-width: 1100px; 
+    max-width: 1100px; /* This can stay if you want hero text slightly wider than normal container */
     margin-top: 60px; 
 }
 

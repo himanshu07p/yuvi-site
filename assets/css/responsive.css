@@ -1,5 +1,3 @@
-css/responsive.css
-
 /* Mobile menu styles */
 .mobile-menu-btn {
     display: none;
@@ -17,8 +15,11 @@ css/responsive.css
         font-size: 16px;
     }
     .container {
-        padding: 0 15px;
-        max-width: 95%;
+        /* Keep max-width defined in containers.css */
+        /* Adjust padding for slightly smaller screens if needed */
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+        /* Remove max-width: 95%; */
     }
     .blog-posts {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -51,6 +52,10 @@ css/responsive.css
         margin-top: 20px;
         width: 100%;
         max-width: 100%;
+    }
+    .container {
+        padding-left: var(--space-md); /* Reduce padding */
+        padding-right: var(--space-md); /* Reduce padding */
     }
 }
 
@@ -129,6 +134,10 @@ css/responsive.css
     .blog-posts {
         grid-template-columns: 1fr;
     }
+    .container {
+        padding-left: var(--space-md); /* Consistent padding */
+        padding-right: var(--space-md); /* Consistent padding */
+    }
 }
 
 @media (max-width: 576px) {
@@ -168,5 +177,9 @@ css/responsive.css
     }
     .blog-meta span {
         margin-bottom: 5px;
+    }
+    .container {
+        padding-left: var(--space-sm); /* Further reduce padding */
+        padding-right: var(--space-sm); /* Further reduce padding */
     }
 }

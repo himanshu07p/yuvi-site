@@ -1,0 +1,17 @@
+/* Container Layout */
+
+.container {
+    width: 100%;
+    max-width: 1200px; /* Adjust max-width as needed */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-lg); /* Default padding */
+    padding-right: var(--space-lg); /* Default padding */
+}
+
+/* Optional: Fluid container */
+.container-fluid {
+    width: 100%;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+}
