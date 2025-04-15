@@ -1,9 +1,9 @@
 /* Header Component */
 
 header {
-    background-color: rgba(255, 255, 255, 0.7); /* Adjusted alpha for more translucency */
-    backdrop-filter: blur(10px); /* Increase blur slightly */
-    -webkit-backdrop-filter: blur(10px); /* Safari compatibility */
+    background-color: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
     position: fixed;
     top: 0;
     left: 0;
@@ -11,15 +11,15 @@ header {
     z-index: var(--z-sticky);
     padding: 1.25rem 0;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Darker border for light background */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 header.scrolled {
-    background-color: rgba(255, 255, 255, 0.8); /* Adjusted alpha for more translucency */
+    background-color: rgba(255, 255, 255, 0.8); 
     box-shadow: var(--box-shadow-md);
-    backdrop-filter: blur(12px); /* Slightly increase blur on scroll */
-    -webkit-backdrop-filter: blur(12px); /* Safari compatibility */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Keep or adjust border */
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); 
     padding: 0.85rem 0;
 }
 

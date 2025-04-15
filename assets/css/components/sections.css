@@ -1,16 +1,11 @@
-/* Sections Component Styles */
-
-/* General Section Styling */
-
 section {
-    padding: var(--space-2xl) 0; /* Default vertical padding */
+    padding: var(--space-2xl) 0; 
     position: relative;
-    overflow: hidden; /* Prevent content overflow issues */
+    overflow: hidden; 
 }
 
-/* Add padding to the first section inside main, EXCEPT if it's the hero */
 main > section:first-child:not(.hero) {
-    padding-top: calc(110px + var(--space-2xl)); /* Header height + desired section padding */
+    padding-top: calc(110px + var(--space-2xl)); 
 }
 
 /* Common section styles */
@@ -74,6 +69,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: var(--space-lg);
+    justify-items: center; /* Center items in the grid */
 }
 
 .feature-item {
@@ -86,6 +82,9 @@ section {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    max-width: 350px; /* Set a max-width */
+    width: 100%; /* Take full width up to max-width */
+    margin: 0 auto; /* Center the item */
 }
 
 .feature-item::before {
@@ -226,8 +225,24 @@ section {
 
 .service-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-2xl);
+    place-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Ensure even spacing when there are fewer cards */
+@media (min-width: 992px) {
+    .service-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.service-item {
+    max-width: 400px; /* Limit the width for better layout control */
+    width: 100%; /* Take full width up to max-width */
 }
 
 .services-cta {
@@ -326,21 +341,24 @@ section {
     overflow: hidden;
     padding: var(--space-xl);
     box-shadow: var(--box-shadow-md);
+    text-align: center; /* Center testimonial content */
+    margin: 0 auto; /* Center the item */
 }
 
 .testimonial-content {
     position: relative;
     padding-bottom: var(--space-lg);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center; /* Center text content */
 }
 
 .quote-icon {
-    position: absolute;
-    top: -10px;
-    left: 0;
+    position: relative; /* Change from absolute to relative */
+    display: inline-block; /* Display as inline-block */
     font-size: var(--text-3xl);
     color: var(--primary);
     opacity: 0.2;
+    margin-bottom: var(--space-sm); /* Add margin bottom */
 }
 
 .testimonial-content p {
@@ -348,18 +366,21 @@ section {
     font-size: var(--text-lg);
     color: var(--text-dark);
     margin-bottom: var(--space-md);
-    padding-left: var(--space-xl);
+    padding-left: 0; /* Remove left padding */
+    text-align: center; /* Center align text */
 }
 
 .ratings {
     color: #FFD700;
     font-size: var(--text-sm);
     margin-bottom: var(--space-sm);
+    text-align: center; /* Center align ratings */
 }
 
 .testimonial-author {
     display: flex;
     align-items: center;
+    justify-content: center; /* Center the author section */
     padding-top: var(--space-md);
 }
 
@@ -476,4 +497,156 @@ section {
     justify-content: center;
     gap: var(--space-md);
     flex-wrap: wrap;
+}
+
+/* Company Overview Section */
+.company-overview-section {
+    padding: var(--space-3xl) 0;
+    background-color: var(--light-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.company-overview-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(192, 144, 87, 0.05);
+    z-index: 0;
+}
+
+.overview-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.overview-text h2 {
+    font-size: var(--text-3xl);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.overview-text h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gradient-primary);
+}
+
+.overview-text p {
+    font-size: var(--text-lg);
+    color: var(--text-light);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--space-md);
+    text-align: center;
+}
+
+.why-choose-us {
+    margin-top: var(--space-2xl);
+    padding: var(--space-xl);
+    background-color: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-md);
+}
+
+.why-choose-us h3 {
+    font-size: var(--text-xl);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+    display: flex;
+    margin-bottom: var(--space-md);
+    align-items: flex-start;
+}
+
+.benefits-list i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-right: var(--space-md);
+    margin-top: 4px;
+}
+
+.benefits-list div {
+    flex-grow: 1;
+}
+
+.benefits-list strong {
+    display: block;
+    color: var(--text-dark);
+    font-size: var(--text-md);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 5px;
+}
+
+.benefits-list p {
+    font-size: var(--text-md);
+    color: var(--text-light);
+    margin: 0;
+    text-align: left;
+}
+
+.overview-cta {
+    margin-top: var(--space-xl);
+    text-align: center;
+}
+
+.overview-cta p {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-md);
+    color: var(--text-dark);
+}
+
+.overview-cta .btn {
+    margin-top: var(--space-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .overview-text h2 {
+        font-size: var(--text-2xl);
+    }
+    
+    .overview-text p {
+        font-size: var(--text-md);
+    }
+    
+    .benefits-list li {
+        flex-direction: column;
+        margin-bottom: var(--space-lg);
+    }
+    
+    .benefits-list i {
+        margin-bottom: var(--space-xs);
+    }
+    
+    .benefits-list p {
+        text-align: center;
+    }
+    
+    .why-choose-us {
+        padding: var(--space-md);
+    }
 }

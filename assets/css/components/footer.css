@@ -108,6 +108,17 @@ footer {
     color: var(--color-gray-2); /* Match link color */
 }
 
+.footer-contact p a {
+    color: var(--color-gray-2); /* Match the text color */
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.footer-contact p a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
 .footer-contact i {
     color: var(--primary);
     margin-top: 4px;

@@ -52,6 +52,7 @@
 
 .about-text .section-title {
     text-align: left;
+    margin-bottom: var(--space-lg);
 }
 
 .about-text .section-title:after {
@@ -67,6 +68,42 @@
 .about-text strong {
     color: var(--primary);
     font-weight: var(--font-weight-semibold);
+}
+
+.about-subtitle {
+    color: var(--text-dark);
+    font-size: var(--text-xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.commitment-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: var(--space-lg);
+}
+
+.commitment-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--space-sm);
+    color: var(--text-light);
+}
+
+.commitment-list i {
+    color: var(--primary);
+    margin-right: var(--space-sm);
+    margin-top: 4px; /* Align with text */
+    font-size: 1rem;
+}
+
+.service-highlights {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--box-shadow-sm);
 }
 
 .services-offered-title {
@@ -95,11 +132,18 @@
     font-size: 1.1em;
 }
 
+.about-image {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
 .about-image img {
     width: 100%;
     height: auto;
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--box-shadow-lg);
+    box-shadow: var(--box-shadow-md);
+    object-fit: cover;
 }
 
 .features-section.light-bg {

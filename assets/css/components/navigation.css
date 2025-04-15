@@ -18,17 +18,17 @@ nav li {
 
 nav a {
     display: block;
-    color: var(--text-dark); /* Change initial link color to dark */
+    color: var(--text-dark); 
     text-decoration: none;
     padding: 8px 16px;
     font-weight: var(--font-weight-medium);
     font-size: var(--text-sm);
     transition: all 0.3s ease;
     border-radius: var(--border-radius-sm);
-    text-shadow: none; /* Remove text shadow */
+    text-shadow: none; 
     position: relative;
     letter-spacing: var(--letter-spacing-wide);
-    border-bottom: none; /* Override default link styles */
+    border-bottom: none; 
 }
 
 nav a::after {
@@ -38,7 +38,7 @@ nav a::after {
     left: 50%;
     width: 0;
     height: 2px;
-    background: var(--primary); /* Use primary color for underline */
+    background: var(--primary);
     transition: all 0.3s ease;
     transform: translateX(-50%);
     opacity: 0;
@@ -51,18 +51,18 @@ nav a.active::after {
 }
 
 header.scrolled nav a {
-    color: var(--text-dark); /* Keep link color dark on scroll */
+    color: var(--text-dark); 
     text-shadow: none;
 }
 
 nav a:hover {
-    color: var(--primary); /* Hover color */
-    background-color: rgba(0, 0, 0, 0.05); /* Subtle dark hover background */
+    color: var(--primary); 
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 header.scrolled nav a:hover {
-    background-color: rgba(0, 0, 0, 0.05); /* Keep same hover background */
-    color: var(--primary); /* Keep same hover color */
+    background-color: rgba(0, 0, 0, 0.05); 
+    color: var(--primary);
 }
 
 nav a.active {
@@ -90,7 +90,7 @@ header.scrolled nav a.active {
     transform: rotate(180deg);
 }
 
-/* Dropdown styles - enhanced */
+/* Dropdown styles - enhanced for vertical display */
 .dropdown-menu {
     position: absolute;
     top: calc(100% + 10px);
@@ -107,6 +107,8 @@ header.scrolled nav a.active {
     z-index: var(--z-dropdown);
     border: 1px solid rgba(0, 0, 0, 0.05);
     overflow: hidden;
+    display: flex; 
+    flex-direction: column; 
 }
 
 .dropdown-menu::before {
@@ -131,6 +133,7 @@ header.scrolled nav a.active {
 .dropdown-menu li {
     width: 100%;
     position: relative;
+    display: block; 
 }
 
 .dropdown-menu a {
@@ -139,10 +142,11 @@ header.scrolled nav a.active {
     font-weight: var(--font-weight-normal);
     border-radius: 0;
     border-left: 3px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: block; 
+    text-align: left; 
+    width: 100%; 
     transition: all 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .dropdown-menu a::after {
@@ -172,7 +176,7 @@ header.scrolled nav a.active {
         box-shadow: none;
         border-radius: 0;
         border: none;
-        background-color: rgba(0, 0, 0, 0.03); /* Subtle background to distinguish from main menu */
+        background-color: rgba(0, 0, 0, 0.03); 
         display: none;
         opacity: 1;
         visibility: visible;
@@ -184,13 +188,13 @@ header.scrolled nav a.active {
     }
 
     .dropdown-menu a {
-        padding-left: 40px; /* Indent submenu items */
+        padding-left: 40px; 
         border-left: none;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
     
     .dropdown-menu a:hover {
-        padding-left: 45px; /* Slightly more indent on hover */
+        padding-left: 45px; 
     }
     
     .has-dropdown > a {

@@ -7,13 +7,12 @@
     margin: 0;
     text-align: center;
     overflow: hidden;
-    height: 100vh; /* Changed from 120vh back to 100vh */
-    /* Removed margin-top: -80px; */
-    margin-bottom: 0; /* Remove bottom margin if sections follow directly */
+    height: 100vh; 
+    margin-bottom: 0; 
     border-radius: 0;
-    display: flex; /* Use flex to center content vertically */
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
 }
 
 .hero-video-container {
@@ -51,16 +50,10 @@
 .hero-content {
     position: relative;
     z-index: 2;
-    padding: var(--space-lg); /* Add some padding for content */
-    height: auto; /* Let content determine height */
-    /* Removed height: 100%; */
-    /* Removed display: flex; */
-    /* Removed flex-direction: column; */
-    /* Removed justify-content: center; */
-    /* Removed align-items: center; */
-    /* Removed padding-top: 0; */
-    max-width: 1100px; /* Ensure content doesn't stretch too wide */
-    margin-top: 60px; /* Add some top margin to push content down from header */
+    padding: var(--space-lg); 
+    height: auto; 
+    max-width: 1100px; 
+    margin-top: 60px; 
 }
 
 /* Pre-heading text */
