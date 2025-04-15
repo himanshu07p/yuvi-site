@@ -1,6 +1,6 @@
 /* Mobile menu styles */
 .mobile-menu-btn {
-    display: none;
+    display: none; /* Initially hidden on all devices */
     background: transparent;
     border: none;
     color: white;
@@ -62,24 +62,35 @@
 @media (max-width: 768px) {
     /* Styles for devices with a max width of 768px */
     .hero {
-        height: 120vh; /* Increased height for mobile too */
-        margin-top: -60px; /* Adjusted negative margin for mobile */
-        padding: 0;
+        height: 100vh; /* Match hero.css for consistency */
+        margin-top: 0; /* Remove negative margin that can cause issues */
+        padding-top: 80px; /* Add padding for the fixed header */
     }
     .hero-content {
-        padding-top: 0; /* Removed padding-top */
+        justify-content: center; 
+        padding-top: 0;
         padding-bottom: 0;
-        justify-content: center; /* Keep content centered */
     }
-    .hero h1 {
-        font-size: 2rem;
+    /* Prevent video overlay from adding unnecessary height */
+    .hero-video-container,
+    .video-overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
     }
-    .hero p {
-        font-size: 1rem;
+    /* Ensure the content is centered and properly spaced */
+    .container.hero-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        z-index: 2;
     }
     /* Mobile navigation */
     .mobile-menu-btn {
-        display: block;
+        display: block; /* Only show on mobile */
         position: absolute;
         top: 15px;
         right: 15px;
@@ -138,6 +149,70 @@
         padding-left: var(--space-md); /* Consistent padding */
         padding-right: var(--space-md); /* Consistent padding */
     }
+
+    /* Mobile menu enhancements */
+    .mobile-menu-btn {
+        display: block;
+        font-size: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 44px; /* Larger tap target */
+        height: 44px; /* Larger tap target */
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+        z-index: 1001; /* Above the menu */
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn.active {
+        color: var(--primary); /* Brand color when active */
+    }
+    
+    /* Mobile navigation menu */
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Start offscreen */
+        width: 85%; /* Wider menu */
+        max-width: 350px;
+        height: 100vh;
+        background-color: white;
+        transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother easing */
+        box-shadow: none;
+        z-index: 1000;
+    }
+    
+    nav ul.active {
+        right: 0;
+    }
+    
+    /* Overlay when menu is open */
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .menu-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Prevent body scrolling when menu is open */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    }
 }
 
 @media (max-width: 576px) {
@@ -159,9 +234,9 @@
         margin: 5px 0;
     }
     .hero {
-        height: 120vh;
-        margin-top: -60px;
-        padding: 40px 15px;
+        height: 100vh;
+        margin-top: 0; /* Remove conflicting negative margin */
+        padding: 80px var(--space-sm) 0; /* Add top padding for the header */
     }
     .btn {
         width: 100%;
@@ -170,7 +245,12 @@
     .hero-buttons {
         flex-direction: column;
         width: 100%;
+        align-items: center;
+    }
+    .hero-buttons .btn {
+        width: 100%;
         max-width: 280px;
+        margin-bottom: var(--space-sm);
     }
     .blog-meta {
         flex-direction: column;
@@ -181,5 +261,14 @@
     .container {
         padding-left: var(--space-sm); /* Further reduce padding */
         padding-right: var(--space-sm); /* Further reduce padding */
+    }
+
+    .mobile-menu-btn {
+        margin-right: -10px; /* Adjust position on smallest screens */
+    }
+    
+    nav ul {
+        width: 100%; /* Full width on very small screens */
+        max-width: none;
     }
 }

@@ -1,0 +1,59 @@
+/* Form Components */
+
+/* ...existing form styles... */
+
+/* Mobile optimizations for forms */
+@media (max-width: 768px) {
+    .styled-form {
+        padding: var(--space-md);
+    }
+    
+    .form-group {
+        margin-bottom: var(--space-md);
+    }
+    
+    .form-group label {
+        margin-bottom: 6px;
+        font-size: var(--text-sm);
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: var(--text-sm);
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+    
+    .contact-form-container,
+    .contact-details-content {
+        padding: var(--space-md);
+    }
+    
+    .contact-info-item {
+        margin-bottom: var(--space-md);
+    }
+    
+    /* Make submit buttons full width on mobile */
+    .styled-form .btn {
+        width: 100%;
+        display: block;
+        padding: 12px;
+        margin-top: var(--space-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .styled-form {
+        padding: var(--space-sm);
+    }
+    
+    .contact-form-container,
+    .contact-details-content {
+        padding: var(--space-sm);
+    }
+}

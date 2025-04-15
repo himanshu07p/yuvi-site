@@ -14,6 +14,13 @@ footer {
     border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* More subtle border */
 }
 
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+}
+
 .footer-logo img {
     max-height: 40px;
     margin-bottom: var(--space-sm);
@@ -35,6 +42,8 @@ footer {
     line-height: var(--line-height-relaxed);
     max-width: 250px;
     color: var(--color-gray-2); /* Slightly brighter paragraph */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .footer-links h4,
@@ -173,10 +182,24 @@ footer {
         grid-template-columns: 1fr;
         text-align: center;
     }
+    
+    .footer-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+    }
+    
+    .footer-logo img {
+        max-height: 55px; /* Make the footer logo bigger on mobile */
+        margin-bottom: var(--space-md); /* Add a bit more space below the logo */
+    }
+    
     .footer-logo p {
         margin-left: auto;
         margin-right: auto;
     }
+    
     .footer-links h4::after,
     .footer-contact h4::after,
     .footer-social h4::after { /* Added .footer-social */

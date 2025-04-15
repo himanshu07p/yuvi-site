@@ -11,57 +11,197 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Mobile menu toggle
+    // Mobile navigation drawer logic
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navMenu = document.querySelector('nav ul');
-    
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
+    let menuOverlay = document.querySelector('.menu-overlay');
+    if (!menuOverlay) {
+        menuOverlay = document.createElement('div');
+        menuOverlay.className = 'menu-overlay';
+        document.body.appendChild(menuOverlay);
     }
-    
-    // Add dropdown toggle functionality for mobile
-    const dropdownItems = document.querySelectorAll('.has-dropdown');
-    
-    dropdownItems.forEach(item => {
-        const link = item.querySelector('a');
+    // Add close button if not present
+    let closeBtn = document.querySelector('.mobile-menu-close');
+    if (!closeBtn) {
+        closeBtn = document.createElement('button');
+        closeBtn.className = 'mobile-menu-close';
+        closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+        closeBtn.setAttribute('aria-label', 'Close menu');
+        navMenu.parentNode.appendChild(closeBtn); // Place close button as sibling to nav ul
+    }
+
+    function openMenu() {
+        navMenu.classList.add('active');
+        mobileMenuBtn.classList.add('active');
+        menuOverlay.classList.add('active');
+        document.body.classList.add('menu-open');
+        closeBtn.style.display = 'flex';
+        mobileMenuBtn.style.display = 'none';
+        closeBtn.focus();
+    }
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        mobileMenuBtn.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        closeBtn.style.display = 'none';
+        mobileMenuBtn.style.display = 'flex';
+        mobileMenuBtn.focus();
+    }
+    // Initial state
+    closeBtn.style.display = 'none';
+
+    mobileMenuBtn.addEventListener('click', function() {
+        if (navMenu.classList.contains('active')) closeMenu();
+        else openMenu();
+    });
+    closeBtn.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) closeMenu();
+    });
+
+    // Mobile dropdown logic - completely revised for working links
+    function setupMobileDropdowns() {
+        const dropdownItems = document.querySelectorAll('.has-dropdown');
+        // Remove old toggles if any
+        document.querySelectorAll('.dropdown-toggle').forEach(btn => btn.remove());
         
-        // Only on mobile view, make the parent link toggle the dropdown
-        if (window.innerWidth <= 768) {
-            link.addEventListener('click', function(e) {
-                // Prevent navigating to "#" href
-                if (this.getAttribute('href') === '#') {
-                    e.preventDefault();
+        dropdownItems.forEach(item => {
+            const link = item.querySelector('a');
+            const dropdownMenu = item.querySelector('.dropdown-menu');
+            
+            // Important: Keep desktop chevron visible on mobile
+            // Don't remove the chevron icon as it helps users understand it's a dropdown
+            
+            // Create toggle button
+            const toggleBtn = document.createElement('button');
+            toggleBtn.className = 'dropdown-toggle';
+            toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i>';
+            toggleBtn.setAttribute('aria-label', 'Expand submenu');
+            
+            // Add toggle button to item (not interfering with link)
+            item.appendChild(toggleBtn);
+            
+            // Fix #1: Ensure link is actually clickable by removing any click handlers from parent
+            item.onclick = null;
+            
+            // Fix #2: Make sure toggle button is positioned correctly
+            toggleBtn.style.position = 'absolute';
+            toggleBtn.style.right = '0';
+            toggleBtn.style.top = '0';
+            toggleBtn.style.height = '100%';
+            toggleBtn.style.width = '50px';
+            toggleBtn.style.background = 'transparent';
+            toggleBtn.style.zIndex = '3'; // Higher than the link
+            
+            // Fix #3: Make the link and toggle button have separate click events
+            link.onclick = function(e) {
+                // If it's a real link (not just a #), allow default action
+                if (this.getAttribute('href') && this.getAttribute('href') !== '#') {
+                    // Allow link to work normally
+                    return true;
                 }
+                // Otherwise prevent default
+                e.preventDefault();
+            };
+            
+            // Add event listener to toggle button only
+            toggleBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Stop event from bubbling to prevent link clicks
                 
-                // Toggle active class on parent
-                this.parentElement.classList.toggle('active');
-                
-                // Close other open dropdowns
-                dropdownItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
+                // Close other dropdowns
+                dropdownItems.forEach(other => {
+                    if (other !== item) {
+                        other.classList.remove('active');
+                        const otherMenu = other.querySelector('.dropdown-menu');
+                        if (otherMenu) {
+                            otherMenu.style.maxHeight = '0px';
+                        }
                     }
                 });
-            });
-        }
-    });
-    
-    // Update dropdown behavior when screen size changes
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-            dropdownItems.forEach(item => {
-                // Remove click event handlers for larger screens
-                const link = item.querySelector('a');
-                link.removeEventListener('click', function(){});
                 
-                // Remove active class that might have been applied
-                item.classList.remove('active');
+                // Toggle current dropdown
+                item.classList.toggle('active');
+                if (dropdownMenu) {
+                    if (item.classList.contains('active')) {
+                        dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + 'px';
+                    } else {
+                        dropdownMenu.style.maxHeight = '0px';
+                    }
+                }
             });
+        });
+        
+        // Fix #4: Ensure dropdown menu links are clickable
+        document.querySelectorAll('.dropdown-menu a').forEach(subLink => {
+            subLink.onclick = function(e) {
+                // Allow the link to work normally
+                return true;
+            };
+        });
+    }
+
+    function teardownMobileDropdowns() {
+        document.querySelectorAll('.dropdown-toggle').forEach(btn => btn.remove());
+        document.querySelectorAll('.has-dropdown').forEach(item => {
+            item.classList.remove('active');
+            const menu = item.querySelector('.dropdown-menu');
+            if (menu) menu.style.maxHeight = '';
+            // Restore chevron if missing
+            const link = item.querySelector('a');
+            if (link && !link.querySelector('i.fa-chevron-down')) {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-chevron-down';
+                link.appendChild(document.createTextNode(' '));
+                link.appendChild(icon);
+            }
+        });
+    }
+
+    // Enhance menu close when clicking a link
+    function enhanceMenuLinks() {
+        // Fix #5: Improved function to handle link clicks properly
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            // Remove any existing click handlers
+            link.onclick = null;
+            
+            // Add new click handler
+            link.addEventListener('click', function(e) {
+                // Important: Only close menu if it's not a dropdown parent
+                // or if we're clicking a link in the dropdown menu
+                const isDropdownLink = this.parentElement.classList.contains('has-dropdown');
+                const isInDropdown = this.closest('.dropdown-menu') !== null;
+                
+                if ((!isDropdownLink || isInDropdown) && window.innerWidth <= 768) {
+                    // Add small delay to allow the navigation to happen
+                    setTimeout(closeMenu, 100);
+                }
+            });
+        });
+    }
+
+    function handleNavResize() {
+        if (window.innerWidth <= 768) {
+            setupMobileDropdowns();
+            enhanceMenuLinks(); // Add this to ensure links work on resize
+            // Ensure correct button visibility on resize
+            if (navMenu.classList.contains('active')) {
+                closeBtn.style.display = 'flex';
+                mobileMenuBtn.style.display = 'none';
+            } else {
+                closeBtn.style.display = 'none';
+                mobileMenuBtn.style.display = 'flex';
+            }
+        } else {
+            teardownMobileDropdowns();
+            closeMenu();
         }
-    });
+    }
+    handleNavResize();
+    window.addEventListener('resize', handleNavResize);
 
     // Smooth scrolling
     const navLinks = document.querySelectorAll('a[href^="#"]');

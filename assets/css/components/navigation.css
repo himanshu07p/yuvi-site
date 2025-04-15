@@ -169,55 +169,197 @@ header.scrolled nav a.active {
 
 /* Responsive dropdown adjustments */
 @media (max-width: 768px) {
+    nav {
+        position: static;
+    }
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        width: 90vw;
+        max-width: 340px;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 80px 0 30px 0;
+        box-shadow: 0 0 20px rgba(0,0,0,0.18);
+        z-index: 1002; /* Must be above .menu-overlay */
+        transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+        overflow-y: auto;
+    }
+    nav ul.active {
+        right: 0;
+    }
+    .menu-overlay {
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 1000; /* Lower than nav ul (which is 1002) */
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s;
+    }
+    .menu-overlay:not(.active) {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 44px;
+        height: 44px;
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        font-size: 1.5rem;
+        color: var(--primary);
+        z-index: 1100;
+    }
+    nav ul.active ~ .mobile-menu-btn {
+        display: none !important;
+    }
+    .mobile-menu-btn.active {
+        display: none !important;
+    }
+    .mobile-menu-close {
+        display: none;
+    }
+    nav ul.active ~ .mobile-menu-close,
+    nav ul.active .mobile-menu-close {
+        display: flex !important;
+    }
+    .mobile-menu-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 44px;
+        height: 44px;
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        font-size: 2rem;
+        z-index: 1101;
+        align-items: center;
+        justify-content: center;
+    }
+    nav li {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+        position: relative;
+    }
+    nav a {
+        display: block;
+        width: 100%;
+        font-size: 1.15rem;
+        color: var(--text-dark);
+        padding: 18px 24px; /* Adjust padding to ensure link is fully clickable */
+        background: none;
+        border-radius: 0;
+        font-weight: 600;
+        text-align: left;
+        transition: background 0.2s, color 0.2s;
+        position: relative;
+        z-index: 2; /* Critical fix: Ensure it's clickable */
+        pointer-events: auto; /* Ensure the links accept clicks */
+    }
+    nav a:active,
+    nav a:hover {
+        padding-left: 24px; /* Keep same padding on hover */
+        background-color: rgba(192, 144, 87, 0.05);
+        color: var(--primary);
+    }
+    nav a.active {
+        color: var(--primary);
+        background: var(--light-bg);
+    }
+    .has-dropdown {
+        position: relative;
+    }
+    .has-dropdown > a {
+        /* Ensure enough space for toggle, and link text never goes under the toggle */
+        padding-right: 56px;
+        z-index: 2;
+        position: relative;
+    }
+    .has-dropdown > a i {
+        display: inline-block !important; /* Override previous style */
+        margin-left: 5px;
+        font-size: 0.8rem; /* Keep the chevron icon visible in mobile */
+    }
+    .dropdown-toggle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50px; /* Fixed width area for tap */
+        height: 100%; /* Full height of parent li */
+        background: transparent;
+        border: none;
+        color: var(--primary);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3; /* Higher than the link */
+        cursor: pointer;
+        pointer-events: auto;
+    }
+    /* Make sure the toggle does not cover the link */
+    .dropdown-toggle {
+        pointer-events: auto;
+    }
+    .has-dropdown > a {
+        pointer-events: auto;
+    }
+    /* Ensure the toggle is not wider than needed */
+    .dropdown-toggle {
+        background: transparent;
+    }
     .dropdown-menu {
         position: static;
-        width: 100%;
-        transform: none;
+        background: #f8f8f8;
         box-shadow: none;
         border-radius: 0;
         border: none;
-        background-color: rgba(0, 0, 0, 0.03); 
-        display: none;
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+        margin: 0;
+        display: block;
+        max-height: 0;
+        overflow: hidden;
         opacity: 1;
         visibility: visible;
-        padding: 0;
+        transition: max-height 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    
-    .dropdown-menu::before {
-        display: none;
-    }
-
-    .dropdown-menu a {
-        padding-left: 40px; 
-        border-left: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .dropdown-menu a:hover {
-        padding-left: 45px; 
-    }
-    
-    .has-dropdown > a {
-        position: relative;
-    }
-    
-    .has-dropdown > a::after {
-        content: '';
-        position: absolute;
-        right: 15px;
-        width: 10px;
-        height: 10px;
-        border-right: 2px solid;
-        border-bottom: 2px solid;
-        transform: rotate(45deg);
-        transition: transform 0.3s ease;
-    }
-    
-    .has-dropdown.active > a::after {
-        transform: rotate(-135deg);
-    }
-    
     .has-dropdown.active .dropdown-menu {
-        display: block;
+        max-height: 800px;
+    }
+    .dropdown-menu li {
+        border-bottom: none;
+        background-color: #f8f8f8; /* Fix: Make dropdown menu items clearly distinct */
+    }
+    .dropdown-menu a {
+        font-size: 0.95rem; /* Slightly smaller than parent items */
+        color: var(--text-dark);
+        padding: 15px 15px 15px 40px; /* Left padding for indent */
+        background: none;
+        font-weight: 500;
+        opacity: 0.95;
+        position: relative; /* Critical fix: ensure these are clickable */
+        z-index: 2;
+        pointer-events: auto;
+    }
+    .dropdown-menu a.active,
+    .dropdown-menu a:hover {
+        color: var(--primary);
+        background: var(--light-bg);
+        padding-left: 52px; /* Only adjust padding for dropdown items */
     }
 }

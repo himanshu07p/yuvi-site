@@ -101,6 +101,7 @@
 .btn-icon {
     display: inline-flex;
     align-items: center;
+    justify-content: center; /* Center the icon with text */
     gap: 8px;
 }
 
@@ -119,4 +120,20 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: var(--space-lg);
+}
+
+/* Add responsive button adjustments */
+@media (max-width: 768px) {
+    .hero-buttons {
+        align-items: center;
+        width: 100%;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 300px; /* Limit max width */
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 10px;
+    }
 }

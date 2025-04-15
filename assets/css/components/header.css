@@ -30,6 +30,32 @@ header .container {
     padding: 0 2rem;
 }
 
+/* Mobile header adjustments */
+@media (max-width: 768px) {
+    header .container {
+        padding: 0 1rem;
+        position: relative;
+        justify-content: center; /* Center the logo */
+    }
+    
+    .logo {
+        margin: 0; /* Remove left margin on mobile */
+        justify-content: center; /* Center the logo contents */
+        width: 100%; /* Take up full width for centering */
+    }
+    
+    .logo img {
+        height: 50px; /* Slightly adjust height if needed for mobile */
+    }
+    
+    .mobile-menu-btn {
+        position: absolute;
+        right: 15px; /* Position on the right edge */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -84,7 +110,7 @@ header.scrolled .logo h1 {
 }
 
 .mobile-menu-btn {
-    display: none;
+    display: none; /* This is correct, but something else is overriding it */
     background: transparent;
     border: none;
     color: var(--text-dark); /* Change initial icon color to dark */
@@ -93,6 +119,13 @@ header.scrolled .logo h1 {
     padding: 8px;
     transition: color 0.3s ease;
     outline: none;
+}
+
+/* Ensure hamburger is only visible on mobile */
+@media (min-width: 769px) {
+    .mobile-menu-btn {
+        display: none !important; /* Use !important to override any other styles */
+    }
 }
 
 header.scrolled .mobile-menu-btn {

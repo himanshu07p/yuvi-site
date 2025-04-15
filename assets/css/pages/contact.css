@@ -1,7 +1,9 @@
 /* Contact Page Specific Styles */
 
 .contact-hero {
-    background: var(--gradient-dark); /* Or use a specific image/gradient */
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../../images/contact-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .contact-details-form-section {
@@ -10,9 +12,16 @@
 
 .contact-grid {
     display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Adjust ratio as needed */
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2xl);
-    align-items: flex-start; /* Align items to the top */
+}
+
+.contact-details-content {
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    box-shadow: var(--box-shadow-md);
+    height: 100%;
 }
 
 .contact-details-content .section-title,
@@ -34,86 +43,104 @@
 
 .contact-info-item {
     display: flex;
-    align-items: flex-start;
     gap: var(--space-md);
     margin-bottom: var(--space-lg);
 }
 
 .contact-info-item i {
-    font-size: 1.5rem;
     color: var(--primary);
+    font-size: var(--text-xl);
+    flex-shrink: 0;
     margin-top: 5px;
-    width: 25px;
-    text-align: center;
 }
 
-.contact-info-item div strong {
+.contact-info-item div {
+    flex-grow: 1;
+}
+
+.contact-info-item strong {
     display: block;
-    font-weight: var(--font-weight-semibold);
     color: var(--text-dark);
-    margin-bottom: var(--space-xs);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: 5px;
 }
 
-.contact-info-item div p {
+.contact-info-item p {
     margin-bottom: 0;
-    line-height: var(--line-height-relaxed);
     color: var(--text-light);
-}
-.contact-info-item div p a {
-    color: var(--text-light);
-    border-bottom: 1px solid transparent;
-}
-.contact-info-item div p a:hover {
-    color: var(--primary);
-    border-bottom-color: var(--primary);
 }
 
+.contact-info-item a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: var(--transition-normal);
+}
+
+.contact-info-item a:hover {
+    color: var(--primary);
+}
 
 .contact-form-container {
-    background-color: var(--light-bg);
-    padding: var(--space-xl);
+    background-color: white;
     border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
     box-shadow: var(--box-shadow-md);
 }
 
-/* Use styles from forms.css for .styled-form */
-
 .map-section {
-    padding: 0; /* Remove padding if map should be edge-to-edge */
-    margin-bottom: calc(-1 * var(--space-lg)); /* Overlap footer slightly if desired */
+    padding-bottom: var(--space-3xl);
 }
 
 .map-container {
-    line-height: 0; /* Remove extra space below iframe */
-}
-
-.map-container iframe {
-    display: block; /* Ensure iframe behaves like a block element */
     width: 100%;
-    border: none;
+    height: 450px;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--box-shadow-md);
 }
 
-/* Responsive adjustments */
+/* Mobile optimizations */
 @media (max-width: 992px) {
     .contact-grid {
         grid-template-columns: 1fr;
-    }
-    .contact-form-container {
-        margin-top: var(--space-xl);
-    }
-    .contact-details-content .section-title,
-    .contact-form-container .section-title {
-        text-align: center;
-    }
-    .contact-details-content .section-title:after,
-    .contact-form-container .section-title:after {
-        left: 50%;
-        transform: translateX(-50%);
     }
 }
 
 @media (max-width: 768px) {
     .contact-hero {
         padding: var(--space-3xl) 0 var(--space-2xl);
+    }
+
+    .contact-details-form-section {
+        padding: var(--space-2xl) 0;
+    }
+    
+    .contact-details-content,
+    .contact-form-container {
+        padding: var(--space-lg);
+    }
+    
+    .map-section {
+        padding-bottom: var(--space-2xl);
+    }
+    
+    .map-container {
+        height: 350px;
+        border-radius: var(--border-radius-md);
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-details-content,
+    .contact-form-container {
+        padding: var(--space-md);
+    }
+    
+    .contact-info-item {
+        gap: var(--space-sm);
+    }
+    
+    .map-container {
+        height: 300px;
     }
 }

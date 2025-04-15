@@ -1,7 +1,9 @@
 /* Service Page Specific Styles */
 
 .service-hero {
-    background: var(--gradient-dark); /* Default gradient, can be customized per service */
+    background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('../../images/service-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
     color: white;
 }
 
@@ -20,10 +22,11 @@
 }
 
 .service-content-section h2 {
+    color: var(--text-dark);
     font-size: var(--text-2xl);
+    margin-bottom: var(--space-md);
     position: relative;
     padding-bottom: var(--space-sm);
-    margin-bottom: var(--space-lg);
 }
 
 .service-content-section h2::after {
@@ -37,19 +40,19 @@
 }
 
 .service-content-section p {
-    color: var(--text-light);
+    margin-bottom: var(--space-md);
     line-height: var(--line-height-relaxed);
-    margin-bottom: var(--space-lg);
+    color: var(--text-light);
 }
 
 .service-content-section ul,
 .service-content-section ol {
     margin-bottom: var(--space-lg);
-    padding-left: var(--space-md);
+    padding-left: 20px;
 }
 
 .service-content-section li {
-    margin-bottom: var(--space-sm);
+    margin-bottom: 0.5rem;
     color: var(--text-light);
     position: relative;
     padding-left: var(--space-md); /* Space for icon */
@@ -90,20 +93,77 @@
     line-height: 1;
 }
 
+.service-content-section strong {
+    color: var(--text-dark);
+    font-weight: var(--font-weight-semibold);
+}
+
 .service-cta-section {
     background-color: var(--light-bg);
+    padding: var(--space-2xl) 0;
     text-align: center;
 }
 
 .service-cta-section h2 {
-    color: var(--text-dark);
+    font-size: var(--text-2xl);
     margin-bottom: var(--space-sm);
+    color: var(--text-dark);
 }
 
 .service-cta-section p {
-    color: var(--text-light);
-    margin-bottom: var(--space-lg);
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto var(--space-xl);
+    color: var(--text-light);
+}
+
+.service-cta-section .btn {
+    min-width: 200px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .service-content-section {
+        padding: var(--space-2xl) 0;
+    }
+    
+    .service-content-section h2 {
+        font-size: var(--text-xl);
+    }
+    
+    .service-content-section ul,
+    .service-content-section ol {
+        padding-left: 16px;
+    }
+    
+    .service-cta-section {
+        padding: var(--space-xl) 0;
+    }
+    
+    .service-cta-section h2 {
+        font-size: var(--text-xl);
+    }
+    
+    .service-cta-section .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-content-section h2 {
+        font-size: var(--text-lg);
+    }
+    
+    .service-content-section p,
+    .service-content-section li {
+        font-size: var(--text-sm);
+    }
+    
+    .service-cta-section h2 {
+        font-size: var(--text-lg);
+    }
+    
+    .service-cta-section p {
+        font-size: var(--text-sm);
+    }
 }
