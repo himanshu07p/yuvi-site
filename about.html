@@ -7,6 +7,377 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="assets/images/logo-png.png">
+    <style>
+        /* Page-specific styles */
+        .about-hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('assets/images/about-hero-bg.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: calc(var(--space-3xl) + 60px) 0 var(--space-3xl);
+        }
+        
+        .statistics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+            margin: var(--space-3xl) 0;
+            text-align: center;
+        }
+        
+        .statistic-item {
+            background: white;
+            border-radius: var(--border-radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition-normal);
+        }
+        
+        .statistic-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+        
+        .stat-number {
+            font-size: var(--text-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary);
+            margin-bottom: var(--space-xs);
+            font-family: var(--font-secondary);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: var(--text-md);
+            color: var(--text-light);
+        }
+        
+        .about-mission-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-3xl);
+            align-items: center;
+            margin: var(--space-3xl) 0;
+        }
+        
+        .mission-content {
+            padding-right: var(--space-xl);
+        }
+        
+        .mission-image {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--box-shadow-lg);
+            height: 450px;
+        }
+        
+        .mission-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .mission-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(192, 144, 87, 0.8), transparent);
+            z-index: 1;
+        }
+        
+        .mission-image::after {
+            content: '"Our Mission"';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            font-family: var(--font-secondary);
+            font-style: italic;
+            font-size: var(--text-2xl);
+            z-index: 2;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: var(--space-4xl) auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: var(--border-radius-full);
+        }
+        
+        .timeline-item {
+            padding: 10px 50px;
+            position: relative;
+            width: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: var(--box-shadow-md);
+        }
+        
+        .timeline-left {
+            left: 0;
+            text-align: right;
+        }
+        
+        .timeline-right {
+            left: 50%;
+            text-align: left;
+        }
+        
+        .timeline-left::after {
+            right: -12px;
+        }
+        
+        .timeline-right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: var(--space-lg);
+            background-color: white;
+            position: relative;
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--box-shadow-md);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: var(--space-xs);
+            color: var(--primary);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: -10px;
+            font-weight: var(--font-weight-bold);
+            background: var(--gradient-primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: var(--border-radius-full);
+            font-size: var(--text-sm);
+        }
+        
+        .timeline-left .timeline-year {
+            right: 10px;
+        }
+        
+        .timeline-right .timeline-year {
+            left: 10px;
+        }
+        
+        .team-section {
+            padding: var(--space-3xl) 0;
+            background-color: var(--light-bg);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-2xl);
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition-normal);
+            text-align: center;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+        
+        .member-photo {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: var(--space-md);
+        }
+        
+        .member-info h3 {
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+        
+        .member-position {
+            font-size: var(--text-sm);
+            color: var(--primary);
+            font-style: italic;
+            margin-bottom: var(--space-sm);
+            display: block;
+        }
+        
+        .member-socials {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: var(--space-sm);
+        }
+        
+        .member-socials a {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--light-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            transition: var(--transition-normal);
+        }
+        
+        .member-socials a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Enhanced feature items */
+        .feature-item {
+            padding: var(--space-xl);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow-md);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(192, 144, 87, 0.1), transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-15px);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-mission-section,
+            .statistics-row {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .timeline-left,
+            .timeline-right {
+                left: 0;
+                text-align: left;
+            }
+            
+            .timeline-left::after,
+            .timeline-right::after {
+                left: 18px;
+            }
+            
+            .timeline-left .timeline-year,
+            .timeline-right .timeline-year {
+                left: 10px;
+                right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .statistics-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .mission-image {
+                height: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -43,94 +414,236 @@
     </header>
 
     <main>
-        <!-- Page Hero Section -->
+        <!-- Enhanced Hero Section with Parallax -->
         <section class="page-hero about-hero">
             <div class="container">
-                <h1 class="page-title">About Our Company</h1>
-                <p class="page-subtitle">Learn more about Saurabh Legal Services Pvt. Ltd.'s commitment to providing the best attestation and legal services.</p>
+                <h1 class="page-title fade-up">Our Journey of Excellence</h1>
+                <p class="page-subtitle fade-up">Discover the story, mission, and people behind Saurabh Legal Services Pvt. Ltd.</p>
             </div>
         </section>
 
-        <!-- About Content Section -->
+        <!-- About Intro Section -->
         <section class="about-content-section">
             <div class="container">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h2 class="section-title">Our Journey of Excellence in Document Attestation</h2>
-                        <p>Saurabh Legal Services Pvt. Ltd. was established with a vision to simplify the complex world of international document authentication. Founded in Delhi, we have grown to become one of India's most trusted names in document attestation and legalization services.</p>
-                        
-                        <h3 class="about-subtitle">Our Mission</h3>
-                        <p>We aim to provide hassle-free, timely, and authentic document attestation services that help our clients achieve their international education, employment, and business goals without bureaucratic delays or complications.</p>
-                        
-                        <h3 class="about-subtitle">Our Expertise</h3>
-                        <p>Our team comprises experienced professionals with in-depth knowledge of attestation requirements for over 35 countries. We maintain strong working relationships with various government departments, embassies, and consulates to ensure smooth processing of all documents.</p>
-                        
-                        <h3 class="about-subtitle">Our Commitment</h3>
-                        <p>At Saurabh Legal Services, we are committed to:</p>
-                        <ul class="commitment-list">
-                            <li><i class="fas fa-check-circle"></i> Maintaining complete transparency in our processes</li>
-                            <li><i class="fas fa-check-circle"></i> Adhering to all legal guidelines and regulations</li>
-                            <li><i class="fas fa-check-circle"></i> Providing personalized attention to each client</li>
-                            <li><i class="fas fa-check-circle"></i> Delivering services within promised timeframes</li>
-                            <li><i class="fas fa-check-circle"></i> Ensuring competitive and fair pricing</li>
-                        </ul>
-                        
-                        <h3 class="about-subtitle">Our Reach</h3>
-                        <p>With our strategically located office in Delhi and network of associates across India, we offer convenient access to our services for clients nationwide. Our expertise extends to document attestation for numerous countries including UAE, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain, Malaysia, Singapore, and many European and African nations.</p>
-                        
-                        <a href="contact.html" class="btn primary-btn mt-4">Contact Us</a>
+                <div class="section-header">
+                    <span class="section-tag fade-in">About Us</span>
+                    <h2 class="section-title centered fade-up">Dedicated to Simplifying Document Authentication</h2>
+                    <p class="section-subtitle fade-up">Founded with a vision to streamline complex attestation processes, we've grown to become one of India's most trusted names in document attestation services.</p>
+                </div>
+                
+                <!-- Statistics Row -->
+                <div class="statistics-row">
+                    <div class="statistic-item fade-up">
+                        <span class="stat-number" data-count="12">0</span>
+                        <span class="stat-label">Years Experience</span>
                     </div>
-                    <div class="about-image">
-                        <img data-src="assets/images/about-us.jpg" src="assets/images/placeholder.jpg" alt="About Saurabh Legal Services Team" loading="lazy" onerror="this.src='assets/images/placeholder.jpg'">
+                    <div class="statistic-item fade-up" data-delay="200">
+                        <span class="stat-number" data-count="35">0</span>
+                        <span class="stat-label">Countries Served</span>
+                    </div>
+                    <div class="statistic-item fade-up" data-delay="400">
+                        <span class="stat-number" data-count="15000">0</span>
+                        <span class="stat-label">Documents Processed</span>
+                    </div>
+                    <div class="statistic-item fade-up" data-delay="600">
+                        <span class="stat-number" data-count="98">0</span>
+                        <span class="stat-label">Client Satisfaction %</span>
+                    </div>
+                </div>
+                
+                <!-- Mission and Vision Section -->
+                <div class="about-mission-section">
+                    <div class="mission-content fade-left">
+                        <h2>Our Mission & Vision</h2>
+                        <p class="lead-paragraph">We aim to provide hassle-free, timely, and authentic document attestation services that help our clients achieve their international education, employment, and business goals without bureaucratic delays or complications.</p>
                         
-                        <div class="service-highlights">
-                            <h3 class="services-offered-title">Services Offered By Saurabh Legal Services</h3>
-                            <ul class="services-list">
-                                <li><i class="fas fa-check-circle"></i> Document Attestation</li>
-                                <li><i class="fas fa-check-circle"></i> Notary Attestation</li>
-                                <li><i class="fas fa-check-circle"></i> Mantralay Attestation</li>
-                                <li><i class="fas fa-check-circle"></i> SDM Attestation</li>
-                                <li><i class="fas fa-check-circle"></i> GAD Attestation</li>
-                                <li><i class="fas fa-check-circle"></i> Legal Consultation & Support</li>
-                                <li><i class="fas fa-check-circle"></i> And other attestation & legal services.</li>
-                            </ul>
+                        <h3 class="about-subtitle">Our Vision</h3>
+                        <p>To be the most trusted name in document attestation across India, recognized for our integrity, efficiency, and client-centered approach.</p>
+                        
+                        <h3 class="about-subtitle">Our Core Values</h3>
+                        <ul class="commitment-list">
+                            <li><i class="fas fa-check-circle"></i> <strong>Integrity:</strong> We maintain complete transparency in all our processes</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Excellence:</strong> We strive for perfection in every document we handle</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Efficiency:</strong> We value your time and work to deliver within promised timeframes</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Client Focus:</strong> We provide personalized attention to each client</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mission-image fade-right">
+                        <img src="assets/images/mission.jpg" alt="Our Mission" loading="lazy" onerror="this.src='assets/images/placeholder.jpg'">
+                    </div>
+                </div>
+                
+                <!-- Timeline Section -->
+                <div class="section-header">
+                    <h2 class="section-title centered fade-up">Our Journey</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item timeline-left fade-right">
+                        <div class="timeline-content">
+                            <span class="timeline-year">2012</span>
+                            <h3>Foundation</h3>
+                            <p>Saurabh Legal Services was founded with a small team in New Delhi, focusing on basic attestation services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right fade-left">
+                        <div class="timeline-content">
+                            <span class="timeline-year">2015</span>
+                            <h3>Service Expansion</h3>
+                            <p>Expanded our services to include embassy attestation for all major countries and translation services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left fade-right">
+                        <div class="timeline-content">
+                            <span class="timeline-year">2018</span>
+                            <h3>Growth & Recognition</h3>
+                            <p>Registered as a Private Limited company and received recognition for excellence in document services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-right fade-left">
+                        <div class="timeline-content">
+                            <span class="timeline-year">2021</span>
+                            <h3>Digital Transformation</h3>
+                            <p>Implemented digital tracking systems and expanded our team to provide faster and more efficient services.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item timeline-left fade-right">
+                        <div class="timeline-content">
+                            <span class="timeline-year">Today</span>
+                            <h3>Industry Leader</h3>
+                            <p>Now recognized as one of India's leading attestation service providers with a nationwide presence and global connections.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag fade-in">Our Team</span>
+                    <h2 class="section-title centered fade-up">Meet the Experts</h2>
+                    <p class="section-subtitle fade-up">Our dedicated team brings years of experience in document attestation and legal services.</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-member fade-up">
+                        <div class="member-photo">
+                            <img src="assets/images/team/team-1.jpg" alt="Team Member" onerror="this.src='assets/images/placeholder-avatar.jpg'">
+                        </div>
+                        <div class="member-info">
+                            <h3>Saurabh</h3>
+                            <span class="member-position">Founder & CEO</span>
+                            <p>Over 15 years of experience in legal documentation services.</p>
+                            <div class="member-socials">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member fade-up" data-delay="200">
+                        <div class="member-photo">
+                            <img src="assets/images/team/team-2.jpg" alt="Team Member" onerror="this.src='assets/images/placeholder-avatar.jpg'">
+                        </div>
+                        <div class="member-info">
+                            <h3>Priya Sharma</h3>
+                            <span class="member-position">Operations Manager</span>
+                            <p>Specialist in embassy coordination and document processing.</p>
+                            <div class="member-socials">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member fade-up" data-delay="400">
+                        <div class="member-photo">
+                            <img src="assets/images/team/team-3.jpg" alt="Team Member" onerror="this.src='assets/images/placeholder-avatar.jpg'">
+                        </div>
+                        <div class="member-info">
+                            <h3>Ankit Patel</h3>
+                            <span class="member-position">Legal Consultant</span>
+                            <p>Expert in international documentation requirements.</p>
+                            <div class="member-socials">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member fade-up" data-delay="600">
+                        <div class="member-photo">
+                            <img src="assets/images/team/team-4.jpg" alt="Team Member" onerror="this.src='assets/images/placeholder-avatar.jpg'">
+                        </div>
+                        <div class="member-info">
+                            <h3>Meera Reddy</h3>
+                            <span class="member-position">Client Relations</span>
+                            <p>Dedicated to ensuring exceptional client experience.</p>
+                            <div class="member-socials">
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Why Choose Us Section -->
+        <!-- Enhanced Why Choose Us Section -->
         <section class="features-section light-bg">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title centered">Why Choose Saurabh Legal Services?</h2>
+                    <span class="section-tag fade-in">Why Choose Us</span>
+                    <h2 class="section-title centered fade-up">Our Competitive Edge</h2>
+                    <p class="section-subtitle fade-up">What sets us apart in the world of document attestation services</p>
                 </div>
                 <div class="features-grid">
-                    <div class="feature-item">
+                    <div class="feature-item fade-up">
                         <div class="feature-icon"><i class="fas fa-history"></i></div>
-                        <h3>10+ Years Experience</h3>
-                        <p>Proven track record in the attestation and legal industry.</p>
+                        <h3>12+ Years Experience</h3>
+                        <p>Over a decade of proven expertise in handling complex documentation requirements across various countries.</p>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item fade-up" data-delay="200">
                         <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
                         <h3>Trusted Provider</h3>
-                        <p>Reputable name known for reliability and accuracy.</p>
+                        <p>Recognized by embassies and government departments as a reputable service provider for document attestation.</p>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item fade-up" data-delay="400">
                         <div class="feature-icon"><i class="fas fa-cogs"></i></div>
                         <h3>Comprehensive Solutions</h3>
-                        <p>Tailored services to meet all your attestation and legal needs.</p>
+                        <p>End-to-end services covering all your attestation needs, from notarization to embassy authentication.</p>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item fade-up" data-delay="600">
                         <div class="feature-icon"><i class="fas fa-globe-asia"></i></div>
-                        <h3>All Embassies</h3>
-                        <p>Expertise in handling documents for all country embassies.</p>
+                        <h3>Global Connections</h3>
+                        <p>Established relationships with embassies and consulates worldwide, facilitating smoother processing.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-box">
+                    <div class="cta-content fade-up">
+                        <h2>Ready to Get Started?</h2>
+                        <p>Contact our team today for professional document attestation services tailored to your needs.</p>
+                    </div>
+                    <div class="cta-buttons fade-up">
+                        <a href="contact.html" class="btn primary-btn btn-lg">Contact Us</a>
+                        <a href="services/educational-attestation.html" class="btn secondary-btn btn-lg">Explore Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -176,6 +689,115 @@
         </div>
     </footer>
 
-    <script src="assets/js/main.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animation.js"></script>
+    <script>
+        // Counter animation for statistics
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200; // Lower number = faster animation
+            
+            // Initialize Intersection Observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Start counter when element comes into view
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        let count = 0;
+                        
+                        // Calculate step size based on target value
+                        const step = Math.ceil(target / (2000 / speed));
+                        
+                        // Use a fixed number of steps to avoid infinite animation
+                        const maxSteps = 100;
+                        let stepCount = 0;
+                        
+                        // Update counter at intervals
+                        const updateCount = () => {
+                            if (count < target && stepCount < maxSteps) {
+                                count += step;
+                                stepCount++;
+                                
+                                // If next step would exceed target, set to target
+                                if (count > target) count = target;
+                                counter.innerText = count.toLocaleString();
+                                
+                                // Use requestAnimationFrame with a condition to stop
+                                if (count < target && stepCount < maxSteps) {
+                                    requestAnimationFrame(updateCount);
+                                } else {
+                                    // Ensure final value is exactly the target
+                                    counter.innerText = target.toLocaleString();
+                                }
+                            }
+                        };
+                        
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // Start observing counters
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+            
+            // Animation for fade effects
+            const fadeElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .fade-in');
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Get delay attribute or default to 0
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        
+                        // Add visible class after specified delay
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                            // Unobserve immediately after adding the class
+                            fadeObserver.unobserve(entry.target);
+                        }, delay);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => {
+                // Set initial states
+                if (el.classList.contains('fade-up')) {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                } else if (el.classList.contains('fade-left')) {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateX(-30px)';
+                } else if (el.classList.contains('fade-right')) {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateX(30px)';
+                } else if (el.classList.contains('fade-in')) {
+                    el.style.opacity = '0';
+                }
+                
+                // Set transition properties
+                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                
+                // Start observing
+                fadeObserver.observe(el);
+            });
+            
+            // CSS for visible class
+            if (!document.getElementById('visible-styles')) {
+                const style = document.createElement('style');
+                style.id = 'visible-styles';
+                style.innerHTML = `
+                    .visible {
+                        opacity: 1 !important;
+                        transform: translate(0, 0) !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+    </script>
 </body>
 </html>

@@ -19,15 +19,17 @@
 @import 'components/forms.css';
 @import 'components/testimonials.css';
 @import 'components/blog.css';
-@import 'components/sections.css'; /* Ensure this is imported */
+@import 'components/sections.css';
+@import 'components/countries.css'; /* Import the new countries component */
 
 /* Pages */
-@import 'pages/about.css'; /* Import the new about page styles */
-@import 'pages/contact.css'; /* Added contact page styles */
-@import 'pages/service-page.css'; /* Added service page styles */
+@import 'pages/about.css';
+@import 'pages/contact.css';
+@import 'pages/service-page.css';
 
 /* Utilities */
 @import 'utilities/helpers.css';
 
 /* Responsive */
 @import 'responsive.css';
+
