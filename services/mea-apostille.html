@@ -4,27 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEA Apostille Service</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="../assets/images/logo-png.png">
 </head>
 <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../about.html">About</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-                <li><a href="hrd-attestation.html">HRD Attestation</a></li>
-                <li><a href="mea-apostille.html">MEA Apostille</a></li>
-                <li><a href="embassy-attestation.html">Embassy Attestation</a></li>
-                <li><a href="visa-assistance.html">Visa Assistance</a></li>
-                <li><a href="translation.html">Translation Services</a></li>
-                <li><a href="educational-attestation.html">Educational Attestation</a></li>
-                <li><a href="non-educational-attestation.html">Non-Educational Attestation</a></li>
-                <li><a href="commercial-attestation.html">Commercial Attestation</a></li>
-                <li><a href="personal-attestation.html">Personal Attestation</a></li>
+        <div class="container">
+            <div class="logo">
+                <img src="../assets/images/logo-png.png" alt="Saurabh Legal Services Pvt. Ltd. Logo">
+            </div>
+            
+            <!-- Apple-style Mobile Menu Button -->
+            <div class="burger-container">
+                <div id="burger">
+                    <div class="bar topBar"></div>
+                    <div class="bar btmBar"></div>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav id="main-nav" class="desktop-nav">
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About Us</a></li>
+                    <li class="has-dropdown active">
+                        <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="hrd-attestation.html">HRD Attestation</a></li>
+                            <li class="active"><a href="mea-apostille.html">MEA Apostille</a></li>
+                            <li><a href="embassy-attestation.html">Embassy Attestation</a></li>
+                            <li><a href="visa-assistance.html">Visa Assistance</a></li>
+                            <li><a href="translation.html">Translation Services</a></li>
+                            <li><a href="educational-attestation.html">Educational Attestation</a></li>
+                            <li><a href="non-educational-attestation.html">Non-Educational</a></li>
+                            <li><a href="commercial-attestation.html">Commercial</a></li>
+                            <li><a href="personal-attestation.html">Personal</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../blog/index.html">Blog</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Apple-style Mobile Menu (Full Screen) -->
+        <div class="mobile-header">
+            <ul class="mobile-menu">
+                <li class="menu-item"><a href="../index.html">Home</a></li>
+                <li class="menu-item"><a href="../about.html">About Us</a></li>
+                <li class="menu-item has-submenu">
+                    <a href="#" class="submenu-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="mobile-submenu">
+                        <li><a href="hrd-attestation.html">HRD Attestation</a></li>
+                        <li><a href="mea-apostille.html">MEA Apostille</a></li>
+                        <li><a href="embassy-attestation.html">Embassy Attestation</a></li>
+                        <li><a href="visa-assistance.html">Visa Assistance</a></li>
+                        <li><a href="translation.html">Translation Services</a></li>
+                        <li><a href="educational-attestation.html">Educational Attestation</a></li>
+                        <li><a href="non-educational-attestation.html">Non-Educational</a></li>
+                        <li><a href="commercial-attestation.html">Commercial</a></li>
+                        <li><a href="personal-attestation.html">Personal</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="../blog/index.html">Blog</a></li>
+                <li class="menu-item"><a href="../contact.html">Contact</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
     <main>

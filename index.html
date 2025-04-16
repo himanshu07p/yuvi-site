@@ -14,10 +14,17 @@
             <div class="logo">
                 <img src="assets/images/logo-png.png" alt="Saurabh Legal Services Pvt. Ltd. Logo">
             </div>
-            <button class="mobile-menu-btn" aria-label="Toggle navigation menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
+            
+            <!-- Apple-style Mobile Menu Button -->
+            <div class="burger-container">
+                <div id="burger">
+                    <div class="bar topBar"></div>
+                    <div class="bar btmBar"></div>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation (unchanged) -->
+            <nav id="main-nav" class="desktop-nav">
                 <ul>
                     <li class="active"><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
@@ -39,6 +46,30 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+        </div>
+        
+        <!-- Apple-style Mobile Menu (Full Screen) -->
+        <div class="mobile-header">
+            <ul class="mobile-menu">
+                <li class="menu-item active"><a href="index.html">Home</a></li>
+                <li class="menu-item"><a href="about.html">About Us</a></li>
+                <li class="menu-item has-submenu">
+                    <a href="#" class="submenu-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="mobile-submenu">
+                        <li><a href="services/hrd-attestation.html">HRD Attestation</a></li>
+                        <li><a href="services/mea-apostille.html">MEA Apostille</a></li>
+                        <li><a href="services/embassy-attestation.html">Embassy Attestation</a></li>
+                        <li><a href="services/visa-assistance.html">Visa Assistance</a></li>
+                        <li><a href="services/translation.html">Translation Services</a></li>
+                        <li><a href="services/educational-attestation.html">Educational Attestation</a></li>
+                        <li><a href="services/non-educational-attestation.html">Non-Educational</a></li>
+                        <li><a href="services/commercial-attestation.html">Commercial</a></li>
+                        <li><a href="services/personal-attestation.html">Personal</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="blog/index.html">Blog</a></li>
+                <li class="menu-item"><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </header>
 

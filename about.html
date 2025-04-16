@@ -362,19 +362,163 @@
         }
         
         @media (max-width: 768px) {
+            .about-hero {
+                padding: calc(var(--space-xl) + 80px) 0 var(--space-xl);
+                background-attachment: scroll;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1rem;
+                padding: 0 var(--space-md);
+            }
+            
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+            
             .statistics-row {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-md);
+                padding: 0 var(--space-md);
+            }
+            
+            .statistic-item {
+                padding: var(--space-md) var(--space-sm);
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .about-mission-section {
                 grid-template-columns: 1fr;
+                gap: var(--space-xl);
+            }
+            
+            .mission-content {
+                padding-right: 0;
+                order: 2;
+            }
+            
+            .mission-image {
+                height: 250px;
+                order: 1;
+                margin: 0 var(--space-md);
             }
             
             .team-grid {
                 grid-template-columns: 1fr;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
+                max-width: 300px;
+                margin: 0 auto;
+                gap: var(--space-xl);
             }
             
-            .mission-image {
-                height: 300px;
+            .member-photo {
+                height: 200px;
+            }
+            
+            .timeline::after {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 50px;
+                padding-right: var(--space-sm);
+                margin-bottom: var(--space-md);
+            }
+            
+            .timeline-item::after {
+                left: 9px;
+                width: 22px;
+                height: 22px;
+            }
+            
+            .timeline-left,
+            .timeline-right {
+                left: 0;
+                text-align: left;
+            }
+            
+            .timeline-left::after,
+            .timeline-right::after {
+                left: 9px;
+            }
+            
+            .timeline-left .timeline-year,
+            .timeline-right .timeline-year {
+                left: 0;
+                right: auto;
+                top: -8px;
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+            
+            .timeline-content {
+                padding: var(--space-md) var(--space-sm);
+                margin-bottom: var(--space-sm);
+            }
+            
+            .timeline-content h3 {
+                font-size: 1.1rem;
+                margin-bottom: var(--space-xs);
+            }
+            
+            .timeline-content p {
+                font-size: 0.9rem;
+            }
+            
+            .feature-item {
+                padding: var(--space-md);
+                margin-bottom: var(--space-md);
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                margin-bottom: var(--space-xs);
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .statistics-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .statistic-item {
+                max-width: 200px;
+                margin: 0 auto var(--space-md);
+            }
+            
+            .about-content-section {
+                padding: 0 var(--space-sm);
+            }
+            
+            .section-tag {
+                font-size: 0.65rem;
+                padding: 4px 12px;
+            }
+            
+            .commitment-list li {
+                margin-bottom: var(--space-md);
+            }
+            
+            .member-socials {
+                justify-content: center;
             }
         }
     </style>
@@ -385,10 +529,17 @@
             <div class="logo">
                 <img src="assets/images/logo-png.png" alt="Saurabh Legal Services Pvt. Ltd. Logo">
             </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
+            
+            <!-- Apple-style Mobile Menu Button -->
+            <div class="burger-container">
+                <div id="burger">
+                    <div class="bar topBar"></div>
+                    <div class="bar btmBar"></div>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav id="main-nav" class="desktop-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li class="active"><a href="about.html">About Us</a></li>
@@ -410,6 +561,30 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
+        </div>
+        
+        <!-- Apple-style Mobile Menu (Full Screen) -->
+        <div class="mobile-header">
+            <ul class="mobile-menu">
+                <li class="menu-item"><a href="index.html">Home</a></li>
+                <li class="menu-item active"><a href="about.html">About Us</a></li>
+                <li class="menu-item has-submenu">
+                    <a href="#" class="submenu-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="mobile-submenu">
+                        <li><a href="services/hrd-attestation.html">HRD Attestation</a></li>
+                        <li><a href="services/mea-apostille.html">MEA Apostille</a></li>
+                        <li><a href="services/embassy-attestation.html">Embassy Attestation</a></li>
+                        <li><a href="services/visa-assistance.html">Visa Assistance</a></li>
+                        <li><a href="services/translation.html">Translation Services</a></li>
+                        <li><a href="services/educational-attestation.html">Educational Attestation</a></li>
+                        <li><a href="services/non-educational-attestation.html">Non-Educational</a></li>
+                        <li><a href="services/commercial-attestation.html">Commercial</a></li>
+                        <li><a href="services/personal-attestation.html">Personal</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="blog/index.html">Blog</a></li>
+                <li class="menu-item"><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </header>
 
