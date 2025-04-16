@@ -342,8 +342,10 @@ function initFormValidation() {
  * Fix image loading issues
  */
 function fixImageLoadingIssues() {
-    // Define a default placeholder image (base64 small placeholder)
+    // Define default placeholder images
     const defaultPlaceholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VlZWVlZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiPkltYWdlPC90ZXh0Pjwvc3ZnPg==';
+    const flagPlaceholder = 'https://static.vecteezy.com/system/resources/thumbnails/006/340/603/small_2x/chessboard-conforms-to-standards-free-vector.jpg';
+    const teamPlaceholder = 'https://i.pinimg.com/originals/bf/eb/a8/bfeba832a872fef7b0426e3c314041d9.png';
     
     // Get all images
     const allImages = document.querySelectorAll('img');
@@ -355,9 +357,13 @@ function fixImageLoadingIssues() {
             return;
         }
         
-        // Add error handler that uses the base64 placeholder as a last resort
+        // Add loading=lazy attribute if not already set
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+        
+        // Add default error handler
         img.onerror = function() {
-            // Try the standard placeholder first
             this.src = 'assets/images/placeholder.jpg';
             
             // If that fails too, use the embedded placeholder
@@ -366,48 +372,42 @@ function fixImageLoadingIssues() {
                 this.onerror = null; // Prevent infinite loop
             };
         };
-        
-        // Add loading=lazy attribute if not already set
-        if (!img.hasAttribute('loading')) {
-            img.setAttribute('loading', 'lazy');
-        }
     });
     
     // Handle specific problem areas
     
-    // Fix country flags
+    // Fix country flags with special placeholder
     const countryFlags = document.querySelectorAll('.country-flag img');
     countryFlags.forEach(flag => {
-        if (flag.src.includes('flags/') || flag.src.includes('countries/')) {
-            flag.onerror = function() {
-                // Try alternative path first
-                const filename = flag.src.split('/').pop();
-                const countryName = flag.alt.replace(' Flag', '').toLowerCase();
-                
-                // Try different directories
-                if (flag.src.includes('flags/')) {
-                    this.src = `assets/images/countries/${filename}`;
-                } else {
-                    this.src = `assets/images/flags/${filename}`;
-                }
-                
-                // If that fails, use the placeholder
-                this.onerror = function() {
-                    this.src = 'assets/images/placeholder.jpg';
-                    this.onerror = function() {
-                        this.src = defaultPlaceholder;
-                        this.onerror = null;
-                    };
-                };
+        flag.onerror = function() {
+            // Try alternative path first
+            const filename = flag.src.split('/').pop();
+            const countryName = flag.alt.replace(' Flag', '').toLowerCase();
+            
+            // Try different directories
+            if (flag.src.includes('flags/')) {
+                this.src = `assets/images/countries/${filename}`;
+            } else if (flag.src.includes('countries/')) {
+                this.src = `assets/images/flags/${filename}`;
+            } else {
+                // If neither directory matches, go straight to placeholder
+                this.src = flagPlaceholder;
+                return;
+            }
+            
+            // If alternative directory fails, use the flag placeholder
+            this.onerror = function() {
+                this.src = flagPlaceholder;
+                this.onerror = null; // Prevent infinite loop
             };
-        }
+        };
     });
     
-    // Fix team member photos
+    // Fix team member photos with specific placeholder
     const teamPhotos = document.querySelectorAll('.member-photo img');
     teamPhotos.forEach(photo => {
         photo.onerror = function() {
-            this.src = 'assets/images/placeholder-avatar.jpg';
+            this.src = teamPlaceholder;
         };
     });
     
