@@ -3,13 +3,14 @@
 .countries-section {
     padding: var(--space-3xl) 0;
     background-color: var(--light-bg);
+    overflow: hidden; /* Important: prevent scrollbars from animations */
 }
 
 .countries-search {
     display: flex;
     justify-content: center;
     max-width: 500px;
-    margin: 0 auto var(--space-2xl);
+    margin: 0 auto var(--space-xl);
 }
 
 .country-search-input {
@@ -34,11 +35,56 @@
     background: var(--primary-dark);
 }
 
-.countries-grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: var(--space-md);
-    margin: var(--space-2xl) 0;
+/* Netflix-style slider rows */
+.countries-slider-container {
+    position: relative;
+    margin: var(--space-xl) 0;
+}
+
+.countries-row-wrapper {
+    position: relative;
+    margin: var(--space-md) 0;
+    overflow: hidden;
+}
+
+.countries-row {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: var(--space-md) 0;
+    width: max-content; /* Ensure it can grow beyond container width */
+}
+
+/* Animation for right-to-left (first row) */
+.countries-row.scroll-right {
+    animation: scroll-right 60s linear infinite;
+}
+
+/* Animation for left-to-right (second row) */
+.countries-row.scroll-left {
+    animation: scroll-left 60s linear infinite;
+}
+
+/* Pause on hover */
+.countries-row-wrapper:hover .countries-row {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-right {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .country-item {
@@ -48,11 +94,15 @@
     text-align: center;
     box-shadow: var(--box-shadow-sm);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0 var(--space-sm);
+    min-width: 120px;
+    flex-shrink: 0;
 }
 
 .country-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--box-shadow-md);
+    z-index: 1; /* Ensure hovered item appears above others */
 }
 
 .country-flag {
@@ -135,25 +185,8 @@
     background: rgba(var(--primary-rgb), 0.1);
 }
 
-/* Responsive adjustments for countries grid */
-@media (max-width: 1200px) {
-    .countries-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
-
-@media (max-width: 992px) {
-    .countries-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .countries-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--space-sm);
-    }
-    
     .country-flag {
         width: 60px;
         height: 45px;
@@ -162,10 +195,14 @@
     .country-item h3 {
         font-size: var(--text-xs);
     }
-}
-
-@media (max-width: 576px) {
-    .countries-grid {
-        grid-template-columns: repeat(2, 1fr);
+    
+    .countries-row-wrapper {
+        margin: var(--space-sm) 0;
+    }
+    
+    /* Faster animation on mobile */
+    .countries-row.scroll-right,
+    .countries-row.scroll-left {
+        animation-duration: 40s;
     }
 }

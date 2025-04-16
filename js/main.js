@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         initCountrySearch();
     }
     
+    // Initialize country slider functionality
+    initCountrySlider();
+    
     // Initialize testimonials if they exist
     if (document.querySelector('.testimonials-slider')) {
         initTestimonials();
@@ -134,28 +137,91 @@ function initCountrySearch() {
     searchInput.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
         
+        if (searchTerm.length === 0) {
+            // Reset all countries to visible
+            countryItems.forEach(item => {
+                item.style.display = '';
+                item.classList.remove('countries-highlight');
+            });
+            
+            // Make sure rows are animated
+            document.querySelectorAll('.countries-row').forEach(row => {
+                row.style.animation = '';
+            });
+            return;
+        }
+        
+        // Pause animations when searching
+        document.querySelectorAll('.countries-row').forEach(row => {
+            row.style.animation = 'none';
+        });
+        
+        let anyVisible = false;
+        
         countryItems.forEach(item => {
             const countryName = item.querySelector('h3').textContent.toLowerCase();
-            
-            // Remove any existing highlight
             item.classList.remove('countries-highlight');
             
-            if (searchTerm.length > 0) {
-                // If search term exists, check if country name includes it
-                if (countryName.includes(searchTerm)) {
-                    item.style.display = '';
-                    if (countryName === searchTerm) {
-                        item.classList.add('countries-highlight');
-                    }
-                } else {
-                    item.style.display = 'none';
+            if (countryName.includes(searchTerm)) {
+                item.style.display = '';
+                anyVisible = true;
+                if (countryName === searchTerm) {
+                    item.classList.add('countries-highlight');
                 }
             } else {
-                // If search term is empty, show all countries
-                item.style.display = '';
+                item.style.display = 'none';
             }
         });
+        
+        // If no matches found, show a message
+        const noResultsMsg = document.getElementById('noCountriesFound');
+        if (!anyVisible && !noResultsMsg) {
+            const msg = document.createElement('div');
+            msg.id = 'noCountriesFound';
+            msg.className = 'countries-note';
+            msg.textContent = 'No countries found matching your search.';
+            document.querySelector('.countries-slider-container').appendChild(msg);
+        } else if (anyVisible && noResultsMsg) {
+            noResultsMsg.remove();
+        }
     });
+}
+
+/**
+ * Country slider functionality
+ */
+function initCountrySlider() {
+    // Clone items for seamless scrolling if needed
+    const row1 = document.getElementById('countriesRow1');
+    const row2 = document.getElementById('countriesRow2');
+    
+    if (!row1 || !row2) return;
+    
+    // Fix for search interaction with animations
+    const resetAnimations = () => {
+        // Only reset if not currently searching
+        if (document.getElementById('countrySearch')?.value?.trim() === '') {
+            row1.style.animation = '';
+            row2.style.animation = '';
+        }
+    };
+    
+    // Reset animations after window resize to prevent jumpiness
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        
+        // Pause during resize
+        row1.style.animation = 'none';
+        row2.style.animation = 'none';
+        
+        resizeTimer = setTimeout(() => {
+            resetAnimations();
+        }, 250);
+    });
+    
+    // Ensure animations restart properly after browser tab becomes active
+    document.addEventListener('visibilitychange', resetAnimations);
 }
 
 /**
