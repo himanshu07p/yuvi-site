@@ -17,7 +17,7 @@ footer {
 .footer-logo {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start for left alignment */
     margin-bottom: var(--space-lg);
 }
 
@@ -42,8 +42,7 @@ footer {
     line-height: var(--line-height-relaxed);
     max-width: 250px;
     color: var(--color-gray-2); /* Slightly brighter paragraph */
-    margin-left: auto;
-    margin-right: auto;
+    /* Removed margin-left: auto; and margin-right: auto; for left alignment */
 }
 
 .footer-links h4,
@@ -186,7 +185,7 @@ footer {
     .footer-logo {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center; /* Keep center alignment for mobile */
         margin-bottom: var(--space-lg);
     }
     
@@ -197,7 +196,7 @@ footer {
     
     .footer-logo p {
         margin-left: auto;
-        margin-right: auto;
+        margin-right: auto; /* Add back center alignment for mobile */
     }
     
     .footer-links h4::after,

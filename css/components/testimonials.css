@@ -29,7 +29,7 @@
 
 .testimonials-section .section-tag {
     background-color: rgba(192, 144, 87, 0.1);
-    color: var(--primary);
+    color: white; /* Changed from var(--primary) to white */
 }
 
 .testimonials-section .section-title {
