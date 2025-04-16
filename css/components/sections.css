@@ -461,12 +461,9 @@ section {
     flex-wrap: wrap;
 }
 
-/* Company Overview Section - Redesigned */
+/* Company Overview Section */
 .company-overview-section {
-    padding: var(--space-4xl) 0;
-    background-color: var(--light-bg);
-    position: relative;
-    overflow: hidden;
+    padding: var(--space-3xl) 0;
 }
 
 .company-overview-section .section-tag {
@@ -503,6 +500,20 @@ section {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-3xl);
     align-items: flex-start;
+}
+
+.overview-intro-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.overview-intro-text h2 {
+    font-size: var(--text-3xl);
+    color: var(--text-dark);
+    margin-bottom: var(--space-md);
+    text-align: center; /* Center align the heading */
 }
 
 .overview-text {
