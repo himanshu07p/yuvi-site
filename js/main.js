@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (document.getElementById('contact-form')) {
         initFormValidation();
     }
+
+    // Handle image loading issues
+    fixImageLoadingIssues();
 });
 
 /**
@@ -333,4 +336,93 @@ function initFormValidation() {
             e.preventDefault();
         }
     });
+}
+
+/**
+ * Fix image loading issues
+ */
+function fixImageLoadingIssues() {
+    // Define a default placeholder image (base64 small placeholder)
+    const defaultPlaceholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2VlZWVlZSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGZpbGw9IiM5OTk5OTkiPkltYWdlPC90ZXh0Pjwvc3ZnPg==';
+    
+    // Get all images
+    const allImages = document.querySelectorAll('img');
+    
+    // Add error handlers to all images
+    allImages.forEach(img => {
+        // Skip images that already have error handlers
+        if (img.hasAttribute('onerror')) {
+            return;
+        }
+        
+        // Add error handler that uses the base64 placeholder as a last resort
+        img.onerror = function() {
+            // Try the standard placeholder first
+            this.src = 'assets/images/placeholder.jpg';
+            
+            // If that fails too, use the embedded placeholder
+            this.onerror = function() {
+                this.src = defaultPlaceholder;
+                this.onerror = null; // Prevent infinite loop
+            };
+        };
+        
+        // Add loading=lazy attribute if not already set
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
+        }
+    });
+    
+    // Handle specific problem areas
+    
+    // Fix country flags
+    const countryFlags = document.querySelectorAll('.country-flag img');
+    countryFlags.forEach(flag => {
+        if (flag.src.includes('flags/') || flag.src.includes('countries/')) {
+            flag.onerror = function() {
+                // Try alternative path first
+                const filename = flag.src.split('/').pop();
+                const countryName = flag.alt.replace(' Flag', '').toLowerCase();
+                
+                // Try different directories
+                if (flag.src.includes('flags/')) {
+                    this.src = `assets/images/countries/${filename}`;
+                } else {
+                    this.src = `assets/images/flags/${filename}`;
+                }
+                
+                // If that fails, use the placeholder
+                this.onerror = function() {
+                    this.src = 'assets/images/placeholder.jpg';
+                    this.onerror = function() {
+                        this.src = defaultPlaceholder;
+                        this.onerror = null;
+                    };
+                };
+            };
+        }
+    });
+    
+    // Fix team member photos
+    const teamPhotos = document.querySelectorAll('.member-photo img');
+    teamPhotos.forEach(photo => {
+        photo.onerror = function() {
+            this.src = 'assets/images/placeholder-avatar.jpg';
+        };
+    });
+    
+    // Fix hero video
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+        heroVideo.addEventListener('error', function() {
+            // If video fails, hide it and show a fallback background
+            const heroContainer = document.querySelector('.hero-video-container');
+            if (heroContainer) {
+                heroContainer.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("assets/images/hero-fallback.jpg")';
+                heroContainer.style.backgroundSize = 'cover';
+                heroContainer.style.backgroundPosition = 'center';
+                this.style.display = 'none';
+            }
+        });
+    }
 }
