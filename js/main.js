@@ -138,7 +138,7 @@ function initCountrySearch() {
         const searchTerm = this.value.toLowerCase().trim();
         
         if (searchTerm.length === 0) {
-            // Reset all countries to visible
+            // Reset all countries to visible and remove highlights
             countryItems.forEach(item => {
                 item.style.display = '';
                 item.classList.remove('countries-highlight');
@@ -157,16 +157,25 @@ function initCountrySearch() {
         });
         
         let anyVisible = false;
+        // Track displayed country names to prevent duplicates
+        const displayedCountries = new Set();
         
         countryItems.forEach(item => {
             const countryName = item.querySelector('h3').textContent.toLowerCase();
             item.classList.remove('countries-highlight');
             
             if (countryName.includes(searchTerm)) {
-                item.style.display = '';
-                anyVisible = true;
-                if (countryName === searchTerm) {
-                    item.classList.add('countries-highlight');
+                // Only show the country if we haven't already displayed it
+                if (!displayedCountries.has(countryName)) {
+                    item.style.display = '';
+                    anyVisible = true;
+                    displayedCountries.add(countryName);
+                    if (countryName === searchTerm) {
+                        item.classList.add('countries-highlight');
+                    }
+                } else {
+                    // Hide duplicate countries
+                    item.style.display = 'none';
                 }
             } else {
                 item.style.display = 'none';
