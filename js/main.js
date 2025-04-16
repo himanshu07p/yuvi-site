@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle header scroll effect
     handleHeaderScroll();
     
+    // Handle hero video
+    initHeroVideo();
+    
     // Initialize country search functionality if element exists
     if (document.getElementById('countrySearch')) {
         initCountrySearch();
@@ -425,4 +428,33 @@ function fixImageLoadingIssues() {
             }
         });
     }
+}
+
+/**
+ * Initialize and handle the hero video
+ */
+function initHeroVideo() {
+    const heroVideo = document.getElementById('hero-video');
+    const fallbackBg = document.querySelector('.hero-fallback-bg');
+    
+    if (!heroVideo) return;
+    
+    // Show fallback if video fails to load
+    heroVideo.addEventListener('error', handleVideoError);
+    
+    // Also check if video can play after a timeout (in case it stalls)
+    setTimeout(() => {
+        if (heroVideo.readyState === 0) { // HAVE_NOTHING - no data available
+            handleVideoError();
+        }
+    }, 2000);
+    
+    function handleVideoError() {
+        console.log("Video could not be loaded, showing fallback");
+        if (fallbackBg) fallbackBg.style.display = 'block';
+        heroVideo.style.display = 'none';
+    }
+    
+    // Force video reload to try to get it to play
+    heroVideo.load();
 }
